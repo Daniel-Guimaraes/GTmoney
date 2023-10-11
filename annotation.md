@@ -22,3 +22,10 @@ declare module 'styled-components' {
   export interface DefaultTheme extends ThemeType {}
 }
 ```
+
+# Lib de ícones
+Para os ícones do projeto eu vou estar utilizando a lib `phosphor-react` e para instalar essa lib eu vou usar o seguinte comando:
+
+```bash
+npm i phosphor-react
+```
