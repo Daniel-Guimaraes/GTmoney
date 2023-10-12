@@ -1,8 +1,10 @@
+import { CalendarBlank, TagSimple } from "phosphor-react";
+
+import { SearchForm } from "./Components/SearchForm";
 import { Summary } from "../../components/Summary";
 import { Header } from "../../components/Header";
 
 import * as S from './styles'
-import { CalendarBlank, TagSimple } from "phosphor-react";
 
 export function Transactions() {
   return (
@@ -11,6 +13,8 @@ export function Transactions() {
       <Summary />
 
       <S.TransactionContainer>
+        <SearchForm />
+
         <S.TransactionTable>
           <tbody>
             <tr>
