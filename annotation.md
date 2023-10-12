@@ -29,3 +29,19 @@ Para os ícones do projeto eu vou estar utilizando a lib `phosphor-react` e para
 ```bash
 npm i phosphor-react
 ```
+
+# Modal
+Sempre que vou criar algum elemento que dado a uma ação do usuário, aparece em tela, eu tenho que tomar muito cuidado com a acessibilidade. Porque vamos supor que eu crie um pop-up, na onde quando eu clico em um botão aparece uma <div> em tela, isso para a acessibilidade não quer dizer nada, e muito menos para os leitores de tela. 
+
+Então para lidar com isso, existe diversas libs que trazem toda a questão de acessibilidade para nossa aplicação, e para isso eu vou estar usando a lib `radix-ui`. E para usar o elemento de modal do radix eu uso o seguinte comando:
+
+```bash
+npm i @radix-ui/react-dialog
+```
+
+# Rádio Button 
+No meu Modal eu tenho dois botões de entrada ou saída, e vão ser botões que o usuário vai poder selecionar somente 1 deles, muito semelhante com o botão do tipo `radio` do html. E para ter essa mesma funcionalidade eu vou usar a lib `radix-ui` para facilitar nossa vida, para instalar o pacote que vou usar, utiliza o seguinte comando:
+
+```bash
+npm i @radix-ui/react-radio-group
+```
