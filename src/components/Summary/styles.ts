@@ -11,6 +11,10 @@ export const SummaryContainer = styled.section`
   gap: 2rem;
 
   margin-top: -5rem;
+
+  @media (max-width: 480px) {
+    overflow: auto;
+  }
 `
 
 interface SummaryCardProps {
@@ -43,4 +47,25 @@ export const SummaryCard = styled.div<SummaryCardProps>`
   ${props => props.variant === 'green' && css`
     background-color: ${props => props.theme["green-700"]};
   `}
+
+  @media (max-width: 480px) {
+    padding: 1.5rem;
+    width: 280px;
+    transform: none !important;
+
+    strong {
+      font-size: 1.5rem;
+    }
+  }
+`
+
+export const LastTransactionDate = styled.span`
+  display: none;
+
+  @media (max-width: 480px) {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: ${props => props.theme['gray-500']}; 
+  }
 `

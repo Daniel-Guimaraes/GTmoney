@@ -3,6 +3,13 @@ import styled from "styled-components";
 export const HeaderContainer = styled.header`
   background-color: ${props => props.theme["gray-900"]};
   padding: 2.5rem 0 7.5rem;
+
+  @media (max-width: 480px) {
+    img {
+      width: 117px;
+      height: 25px;
+    }
+  }
 `
 
 export const HeaderContent = styled.div`
@@ -29,5 +36,11 @@ export const NewTransactionButton = styled.button`
 
   &:hover {
     background-color: ${props => props.theme["green-700"]};  
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.875rem;
+    padding: 0 1rem;
+    height: 38px;
   }
 `
