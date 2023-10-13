@@ -45,3 +45,18 @@ No meu Modal eu tenho dois botões de entrada ou saída, e vão ser botões que 
 ```bash
 npm i @radix-ui/react-radio-group
 ```
+
+# JSON Server
+Precisamos agora de uma API, e como não temos nenhum back-end desse projeto, eu vou o usar o `JSON Server`. Ele basicamente cria uma API completa a partir de um arquivo JSON. Para usar essa ferramenta, eu uso o seguinte comando: 
+
+```bash
+npm i json-server -D
+```
+
+Já com ele instalado eu vou criar um arquivo na raiz do meu projeto chamado `server.json`. Nesse arquivo eu vou criar um objeto, na onde para cada propriedade que eu passar, vai ser uma rota da nossa aplicação. A primeira que vou criar vai ser uma tabela de transações e como serão muitas, e vou adicionar ela como um array:
+
+```json
+{
+  "transactions": [],
+}
+```
