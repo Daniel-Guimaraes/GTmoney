@@ -9,10 +9,11 @@ import { Summary } from "../../components/Summary";
 import { Header } from "../../components/Header";
 
 import * as S from './styles'
+import { dateFormatter, priceFormatter } from "../../utils/formatter";
 
 export function Transactions() {
   const { transactions } = useContext(TransactionsContext)
-  
+
   return (
     <div>
       <Header />
@@ -29,7 +30,8 @@ export function Transactions() {
                   <td width='50%'>{transaction.description}</td>
                   <td>
                     <S.PriceHighlight variant={transaction.type}>
-                      {transaction.price}
+                      {transaction.type === 'outcome' && '- '}
+                      {priceFormatter.format(transaction.price)}
                     </S.PriceHighlight>
                   </td>
                   <td>
@@ -41,7 +43,7 @@ export function Transactions() {
                   <td>
                     <span>
                       <CalendarBlank />
-                      {transaction.created_at}
+                      {dateFormatter.format(new Date(transaction.created_at))}
                     </span>
                   </td>
                 </tr>

@@ -68,7 +68,7 @@ export const TransactionTable = styled.table`
         display: inline-block;
         width: 50%;
         border-radius: 0 0 6px 0;
-        padding: 0 2rem 1.25rem;
+        padding: 0 1rem 1.25rem;
         color: ${props => props.theme["gray-500"]};
 
         span {
