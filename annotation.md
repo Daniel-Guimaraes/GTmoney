@@ -188,4 +188,24 @@ export function Transactions() {
 }
 ```
 
+# Validação do formulário
+
+Para criar a validação do formulário eu vou utilizar a lib `react-hook-form` e o `zod`. Para instalar essas libs eu uso o seguinte comando:
+
+```bash
+npm i react-hook-form zod
+```
+
+Vou precisar instalar também o `resolvers` do hook-form, para instalar eu uso o seguinte comando:
+
+```bash
+npm i @hookform/resolvers
+```
+
+Feito isso eu só preciso criar a estrutura de validação como mostrado abaixo:
+
+```js
+
+```
+
 
