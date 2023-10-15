@@ -6,6 +6,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as Dialog from '@radix-ui/react-dialog'
 
 import * as S from './styles'
+import { useContext } from 'react'
+import { TransactionsContext } from '../../contexts/TransactionsContext'
 
 const newTransactionFormSchema = z.object({
   description: z.string(),
@@ -18,6 +20,8 @@ type NewTransactionFormInputs = z.infer<typeof newTransactionFormSchema>
 
 
 export function NewTransactionModal() {
+  const { createTransaction } = useContext(TransactionsContext)
+
   const {
     control, 
     register, 
@@ -33,7 +37,8 @@ export function NewTransactionModal() {
   })
 
   async function handleCreateNewTransaction(data: NewTransactionFormInputs) {
-    console.log(data)
+    await createTransaction(data)
+
     reset()
   }
 
