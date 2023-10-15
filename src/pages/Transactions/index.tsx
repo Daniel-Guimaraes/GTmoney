@@ -1,15 +1,15 @@
-import { useContext } from "react";
+import { useContext } from 'react'
 
-import { CalendarBlank, TagSimple } from "phosphor-react";
+import { CalendarBlank, TagSimple } from 'phosphor-react'
 
-import { TransactionsContext } from "../../contexts/TransactionsContext";
+import { TransactionsContext } from '../../contexts/TransactionsContext'
 
-import { SearchForm } from "./Components/SearchForm";
-import { Summary } from "../../components/Summary";
-import { Header } from "../../components/Header";
+import { SearchForm } from './Components/SearchForm'
+import { Summary } from '../../components/Summary'
+import { Header } from '../../components/Header'
 
 import * as S from './styles'
-import { dateFormatter, priceFormatter } from "../../utils/formatter";
+import { dateFormatter, priceFormatter } from '../../utils/formatter'
 
 export function Transactions() {
   const { transactions } = useContext(TransactionsContext)
@@ -24,10 +24,10 @@ export function Transactions() {
 
         <S.TransactionTable>
           <tbody>
-            {transactions.map(transaction => {
+            {transactions.map((transaction) => {
               return (
                 <tr key={transaction.id}>
-                  <td width='50%'>{transaction.description}</td>
+                  <td width="50%">{transaction.description}</td>
                   <td>
                     <S.PriceHighlight variant={transaction.type}>
                       {transaction.type === 'outcome' && '- '}
@@ -48,7 +48,7 @@ export function Transactions() {
                   </td>
                 </tr>
               )
-             })}
+            })}
           </tbody>
         </S.TransactionTable>
       </S.TransactionContainer>

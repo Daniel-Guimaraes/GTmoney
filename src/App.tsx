@@ -1,11 +1,11 @@
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider } from 'styled-components'
 
-import { TransactionsProvider } from "./contexts/TransactionsContext";
+import { TransactionsProvider } from './contexts/TransactionsContext'
 
-import { Transactions } from "./pages/Transactions";
+import { Transactions } from './pages/Transactions'
 
-import { defaultTheme } from "./styles/themes/default";
-import { GlobalStyle } from "./styles/global";
+import { defaultTheme } from './styles/themes/default'
+import { GlobalStyle } from './styles/global'
 
 export function App() {
   return (

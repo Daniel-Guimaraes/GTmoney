@@ -13,26 +13,25 @@ const newTransactionFormSchema = z.object({
   description: z.string(),
   price: z.number(),
   category: z.string(),
-  type: z.enum(['income','outcome']),
+  type: z.enum(['income', 'outcome']),
 })
 
-type NewTransactionFormInputs = z.infer<typeof newTransactionFormSchema> 
-
+type NewTransactionFormInputs = z.infer<typeof newTransactionFormSchema>
 
 export function NewTransactionModal() {
   const { createTransaction } = useContext(TransactionsContext)
 
   const {
-    control, 
-    register, 
+    control,
+    register,
     handleSubmit,
     reset,
-    formState: { isSubmitting }, 
+    formState: { isSubmitting },
   } = useForm<NewTransactionFormInputs>({
     resolver: zodResolver(newTransactionFormSchema),
     defaultValues: {
       description: '',
-      type: 'income'
+      type: 'income',
     },
   })
 
@@ -54,42 +53,42 @@ export function NewTransactionModal() {
         </S.CloseButton>
 
         <form onSubmit={handleSubmit(handleCreateNewTransaction)}>
-          <input 
-            type="text" 
-            placeholder='Descrição' 
-            required 
+          <input
+            type="text"
+            placeholder="Descrição"
+            required
             {...register('description')}
           />
-          
-          <input 
-            type="number" 
-            placeholder='Preço' 
-            required 
-            {...register('price', { valueAsNumber: true})}
+
+          <input
+            type="number"
+            placeholder="Preço"
+            required
+            {...register('price', { valueAsNumber: true })}
           />
 
-          <input 
-            type="text" 
-            placeholder='Categoria' 
-            required 
+          <input
+            type="text"
+            placeholder="Categoria"
+            required
             {...register('category')}
           />
 
-          <Controller 
+          <Controller
             control={control}
-            name='type'
+            name="type"
             render={({ field }) => {
               return (
-                <S.TransactionType 
+                <S.TransactionType
                   onValueChange={field.onChange}
                   value={field.value}
                 >
-                  <S.TransactionTypeButton variant='income' value='income'>
+                  <S.TransactionTypeButton variant="income" value="income">
                     <ArrowCircleUp size={24} />
                     Entrada
                   </S.TransactionTypeButton>
-                  
-                  <S.TransactionTypeButton variant='outcome' value='outcome'>
+
+                  <S.TransactionTypeButton variant="outcome" value="outcome">
                     <ArrowCircleDown size={24} />
                     Saída
                   </S.TransactionTypeButton>
@@ -98,7 +97,9 @@ export function NewTransactionModal() {
             }}
           />
 
-          <button type="submit" disabled={isSubmitting}>Cadastrar</button>
+          <button type="submit" disabled={isSubmitting}>
+            Cadastrar
+          </button>
         </form>
       </S.Content>
     </Dialog.Portal>

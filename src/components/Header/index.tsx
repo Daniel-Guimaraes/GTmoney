@@ -1,6 +1,6 @@
 import * as Dialog from '@radix-ui/react-dialog'
 
-import logoImg from '../../assets/logo.svg' 
+import logoImg from '../../assets/logo.svg'
 
 import * as S from './styles'
 import { NewTransactionModal } from '../NewTransactionModal'

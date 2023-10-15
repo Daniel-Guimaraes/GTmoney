@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components'
 
 export const SummaryContainer = styled.section`
   width: 100%;
@@ -22,7 +22,7 @@ interface SummaryCardProps {
 }
 
 export const SummaryCard = styled.div<SummaryCardProps>`
-  background-color: ${props => props.theme["gray-600"]};
+  background-color: ${(props) => props.theme['gray-600']};
   border-radius: 6px;
   padding: 2rem;
   transition: transform 0.2s;
@@ -31,7 +31,7 @@ export const SummaryCard = styled.div<SummaryCardProps>`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: ${props => props.theme["gray-300"]};
+    color: ${(props) => props.theme['gray-300']};
   }
 
   strong {
@@ -41,12 +41,14 @@ export const SummaryCard = styled.div<SummaryCardProps>`
   }
 
   &:hover {
-    transform: scale(1.05); 
+    transform: scale(1.05);
   }
 
-  ${props => props.variant === 'green' && css`
-    background-color: ${props => props.theme["green-700"]};
-  `}
+  ${(props) =>
+    props.variant === 'green' &&
+    css`
+      background-color: ${(props) => props.theme['green-700']};
+    `}
 
   @media (max-width: 480px) {
     padding: 1.5rem;
@@ -66,6 +68,6 @@ export const LastTransactionDate = styled.span`
     display: block;
     margin-top: 0.5rem;
     font-size: 0.875rem;
-    color: ${props => props.theme['gray-500']}; 
+    color: ${(props) => props.theme['gray-500']};
   }
 `

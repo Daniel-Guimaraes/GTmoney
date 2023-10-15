@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const TransactionContainer = styled.main`
   width: 100%;
@@ -19,7 +19,7 @@ export const TransactionTable = styled.table`
 
   td {
     padding: 1.25rem 2rem;
-    background-color: ${props => props.theme["gray-700"]};
+    background-color: ${(props) => props.theme['gray-700']};
 
     &:first-child {
       border-radius: 6px 0 0 6px;
@@ -55,7 +55,7 @@ export const TransactionTable = styled.table`
         width: 50%;
         border-radius: 0 0 0 6px;
         padding: 0 1rem 1.25rem 2rem;
-        color: ${props => props.theme["gray-500"]};
+        color: ${(props) => props.theme['gray-500']};
 
         span {
           display: flex;
@@ -69,7 +69,7 @@ export const TransactionTable = styled.table`
         width: 50%;
         border-radius: 0 0 6px 0;
         padding: 0 1rem 1.25rem;
-        color: ${props => props.theme["gray-500"]};
+        color: ${(props) => props.theme['gray-500']};
 
         span {
           display: flex;
@@ -86,10 +86,10 @@ interface PriceHighlightProps {
 }
 
 export const PriceHighlight = styled.span<PriceHighlightProps>`
-  color: ${props => props.variant === 'income' 
-      ? props.theme["green-300"] 
-      : props.theme["red-300"]  
-  };
+  color: ${(props) =>
+    props.variant === 'income'
+      ? props.theme['green-300']
+      : props.theme['red-300']};
 
   @media (max-width: 480px) {
     font-weight: bold;

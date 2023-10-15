@@ -1,3 +1,50 @@
+# Lint de formatação
+Como lint do projeto eu vou usar o `eslint`, e para usar essa lib eu uso o seguinte comando:
+
+```bash
+npm i eslint @rocketseat/eslint-config -D
+```
+
+Após a instalação via ser criado um arquivo chamado `.eslintrc.cjs`, e nesse arquivo eu vou criar adicionar o seguinte comando 
+
+```js
+module.exports = {
+  root: true,
+  env: { browser: true, es2020: true },
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react-hooks/recommended',
+    '@rocketseat/eslint-config/react' // <- Linha adicionada
+  ],
+  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  parser: '@typescript-eslint/parser',
+  plugins: ['react-refresh'],
+  rules: {
+    'react-refresh/only-export-components': [
+      'warn',
+      { allowConstantExport: true },
+    ],
+  },
+}
+```
+
+E agora eu vou criar dois scripts, um para listar erros em arquivos e outro para corrigir os erros globalmente:
+
+```json
+{
+  "scripts": {
+    "dev": "vite",
+    "dev:server": "json-server server.json -w -d 500",
+    "build": "tsc && vite build",
+    "lint": "eslint src --ext .ts,.tsx", //<- lista os erros
+    "lint:fix": "eslint src --ext .ts,.tsx --fix", //<- Corrigi os erros
+    "preview": "vite preview"
+  }
+}
+```
+
+
 # Lib de estilização do projeto
 Nesse projeto vou estar usando o `styled-components` para fazer a estilização do meu projeto. Então para instalar essa lib se usa o seguinte comando:
 
@@ -259,6 +306,34 @@ export function NewTransactionModal() {
   )
 }
 ```
+
+# lib de Requisições HTTP
+Para fazer as requisições do meu site, eu vou utilizar uma lib chamada `axios`. E por mais que a `fetch API` seja bastante útil, ela não é tão amigável para quem está programando.
+
+Para instalar essa lib eu uso:
+
+```bash
+npm i axios
+```
+
+Vou começar criando uma pasta chamada `lib` e dentro dela um arquivo chamado `axios.ts`. Nesse arquivo eu vou criar uma URL base para meu projeto, para que eu não tenha que ficar repetindo toda hora a mesma URL.
+
+```js
+import axios from "axios";
+
+export const api = axios.create({
+  baseURL: 'http://localhost:3000'
+})
+```
+
+E agora eu modifico a forma que eu estava fazendo as requisições, deixando as coisas bem mais simples:
+
+```js
+
+
+```
+
+
 
 
 
