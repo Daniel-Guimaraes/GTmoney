@@ -358,6 +358,64 @@ Analisando nossa aplicação atual, podemos perceber, que nosso contexto está s
 npm i use-context-selector scheduler
 ```
 
+E agora devo fazer algumas alterações no código, começando no meu arquivo de contexto, trocando o `createContext` que eu estava usando do `react`, e que agora vou usar da lib `use-context-selector`:
+
+```js
+import { createContext } from 'use-context-selector'
+
+export const TransactionsContext = createContext({} as TransactionsContextType)
+```
+
+E agora sempre que eu precisar usar o meu contexto em algum elemento, eu importo algum dado do meu contexto usando `useContextSelector`, e não mais usando o `useContext` do react: 
+
+```js
+import { useContextSelector } from 'use-context-selector'
+
+export function Transactions() {
+  const transactions = useContextSelector(TransactionsContext, (context) => {
+    return context.transactions
+  })
+}
+```
+
+E agora, eu ganho muita performance porque ao invés de todo o meu contexto ser renderizado quando eu buscava alguma informação, ele vai renderizar somente a informação que eu precisar do meu contexto.
+
+
+# Guardando funções na memória
+Existe uma forma de guardar funções em memória, para quando o componente renderizar novamente, eu não criar aquela função do zero, e para fazer isso eu uso o hook do react chamado `useCallback`:
+
+```js
+const fetchTransactions = useCallback(async (query?: string) => {
+  const response = await api.get('transactions', {
+    params: {
+      _sort: 'created_at',
+      _order: 'desc',
+      q: query,
+    },
+  })
+
+  setTransactions(response.data)
+}, [])
+
+const createTransaction = useCallback(
+  async (data: CreateTransactionInput) => {
+    const { category, description, price, type } = data
+
+    const response = await api.post('transactions', {
+      description,
+      price,
+      category,
+      type,
+      created_at: new Date(),
+    })
+
+    setTransactions((prevState) => [response.data, ...prevState])
+  },
+  [],
+)
+```
+
+Quando não é passada nenhuma dependência ele guarda em memória a primeira renderização, então se minha função precisasse de alguma dependência externa, eu teria que adicionar ela no meu array de dependências.
 
 
 
@@ -365,3 +423,8 @@ npm i use-context-selector scheduler
 
 
 
+
+
+
+
+ 
