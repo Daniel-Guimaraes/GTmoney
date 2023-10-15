@@ -329,9 +329,36 @@ export const api = axios.create({
 E agora eu modifico a forma que eu estava fazendo as requisições, deixando as coisas bem mais simples:
 
 ```js
+async function createTransaction(data: CreateTransactionInput) {
+    const { category, description, price, type } = data
 
+    const response = await api.post('transactions', {
+      description,
+      price,
+      category,
+      type,
+      created_at: new Date(),
+    })
 
+    setTransactions((prevState) => [response.data, ...prevState])
+  }
+
+  useEffect(() => {
+    fetchTransactions()
+  }, [])
 ```
+
+
+# Performance no react
+Quando falamos em performance no react, falamos em melhorar o fluxo da nossa aplicação. E deve seguir um alerta para esse quesito, porque acabamos querendo criar um código já prevendo erros em performance, e isso muitas vezes faz com que aconteça exatamente o contrário. Por isso sempre temos que lidar com questões de performance olhando os dados entregues pelo navegador, e tomando decisões com base nisso, fazendo com que componentes que não precisem ser renderizados, não sejam renderizados. 
+
+Analisando nossa aplicação atual, podemos perceber, que nosso contexto está sendo o maior vilão da nossa performance, e para lidar com a performance, vamos usar a lib `use-context-selector`: 
+
+```bash
+npm i use-context-selector scheduler
+```
+
+
 
 
 
