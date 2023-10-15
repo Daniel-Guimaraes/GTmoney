@@ -205,7 +205,61 @@ npm i @hookform/resolvers
 Feito isso eu só preciso criar a estrutura de validação como mostrado abaixo:
 
 ```js
+import * as z from 'zod'
 
+import { zodResolver } from '@hookform/resolvers/zod'
+
+const newTransactionFormSchema = z.object({
+  description: z.string(),
+  price: z.number(),
+  category: z.string(),
+  type: z.enum(['income','outcome']),
+})
+
+type NewTransactionFormInputs = z.infer<typeof newTransactionFormSchema> 
+
+export function NewTransactionModal() {
+  const { 
+    register, 
+    handleSubmit,
+    formState: { isSubmitting }, 
+  } = useForm<NewTransactionFormInputs>({
+    resolver: zodResolver(newTransactionFormSchema)
+  })
+
+  async function handleCreateNewTransaction(data: NewTransactionFormInputs) {
+    console.log(data)
+  }
+
+  return (
+    <form onSubmit={handleSubmit(handleCreateNewTransaction)}>
+      <input 
+        type="text" 
+        placeholder='Descrição' 
+        required 
+        {...register('description')}
+      />
+      
+      <input 
+        type="number" 
+        placeholder='Preço' 
+        required 
+        {...register('price', { valueAsNumber: true})}
+      />
+
+      <input 
+        type="text" 
+        placeholder='Categoria' 
+        required 
+        {...register('category')}
+      />
+      
+      <button type="submit" disabled={isSubmitting}>Cadastrar</button>
+    </form>
+  )
+}
 ```
+
+
 
 
