@@ -418,7 +418,86 @@ const createTransaction = useCallback(
 Quando não é passada nenhuma dependência ele guarda em memória a primeira renderização, então se minha função precisasse de alguma dependência externa, eu teria que adicionar ela no meu array de dependências.
 
 
+# Memorizando componentes
+Uma forma de melhorar a performance da nossa aplicação, é poder guardar em memória componentes que não precisam ser renderizados novamente, somente porque o elemento pai foi renderizado, e para fazer isso eu tenho a funcionalidade `memo` do próprio react, que me permite fazer isso.
 
+Mas fica um aviso, o memo ele não deve ser usado em todo componente que eu criar, ele deve ser usado somente se eu tiver um componente extremamente complexo e que realmente causa uma grande lentidão na nossa aplicação. 
+
+Para utilizar o memo eu faço o seguinte: 
+
+```js
+import * as Dialog from '@radix-ui/react-dialog'
+
+import logoImg from '../../assets/logo.svg'
+
+import * as S from './styles'
+import { NewTransactionModal } from '../NewTransactionModal'
+import { memo } from 'react'
+
+function HeaderComponent() {
+  return (
+    <S.HeaderContainer>
+      <S.HeaderContent>
+        <img src={logoImg} alt="" />
+
+        <Dialog.Root>
+          <Dialog.DialogTrigger asChild>
+            <S.NewTransactionButton>Nova transação</S.NewTransactionButton>
+          </Dialog.DialogTrigger>
+
+          <NewTransactionModal />
+        </Dialog.Root>
+      </S.HeaderContent>
+    </S.HeaderContainer>
+  )
+}
+
+export const Header = memo(HeaderComponent)
+```
+Agora esse componente vai ser armazenado em memória. E não será renderizado caso o elemento pai dele seja renderizado novamente.
+
+Mas como já alertei, nesse caso não precisamos do memo, porque é um componente que não vai fazer tanta diferença na performance do app, por conta de não ser muito complexo, causando a lentidão.
+
+
+# Armazenando variáveis
+O que podemos fazer também é armazenar variáveis na nossa aplicação, isso pode ser muito vantajoso para a performance do site caso eu queira que alguma variável não seja reescrita novamente.
+
+Na minha aplicação eu tenho a variável, que está fazendo o calculo para mostrar o resumo, então como eu não quero que esse cálculo seja refeito toda vez que o componente for renderizado, eu vou adicionar ele na memória utilizando o hook do react chamado `useMemo`:
+
+```js
+import { useMemo } from 'react'
+import { TransactionsContext } from '../contexts/TransactionsContext'
+import { useContextSelector } from 'use-context-selector'
+
+export function useSummary() {
+  const transactions = useContextSelector(TransactionsContext, (context) => {
+    return context.transactions
+  })
+
+  const summary = useMemo(() => {
+    transactions.reduce(
+      (acc, transaction) => {
+        if (transaction.type === 'income') {
+          acc.income += transaction.price
+          acc.total += transaction.price
+        } else {
+          acc.outcome += transaction.price
+          acc.total -= transaction.price
+        }
+
+        return acc
+      },
+      {
+        income: 0,
+        outcome: 0,
+        total: 0,
+      },
+    )
+  }, [transactions])
+
+  return summary
+}
+```
 
 
 

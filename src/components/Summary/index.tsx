@@ -4,10 +4,13 @@ import { useSummary } from '../../hooks/useSummary'
 
 import { priceFormatter } from '../../utils/formatter'
 
+import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
+
 import * as S from './styles'
 
 export function Summary() {
-  const summary = useSummary()
+  const { summary, lastIncomeDate, lastOutcomeDate } = useSummary()
 
   return (
     <S.SummaryContainer>
@@ -20,7 +23,9 @@ export function Summary() {
         <strong>{priceFormatter.format(summary.income)}</strong>
 
         <S.LastTransactionDate>
-          Última Entrada em 13 de Abril
+          Última entrada em{' '}
+          {lastIncomeDate &&
+            format(new Date(lastIncomeDate), "d 'de' MMMM", { locale: ptBR })}
         </S.LastTransactionDate>
       </S.SummaryCard>
       <S.SummaryCard>
@@ -32,7 +37,9 @@ export function Summary() {
         <strong>{priceFormatter.format(summary.outcome)}</strong>
 
         <S.LastTransactionDate>
-          Última Saída em 18 de Abril
+          Última Saída em{' '}
+          {lastOutcomeDate &&
+            format(new Date(lastOutcomeDate), "d 'de' MMMM", { locale: ptBR })}
         </S.LastTransactionDate>
       </S.SummaryCard>
       <S.SummaryCard variant="green">
